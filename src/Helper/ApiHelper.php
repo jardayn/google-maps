@@ -53,7 +53,7 @@ class ApiHelper extends AbstractHelper
      * @param string  $language  The language.
      * @param array   $libraries Additionnal libraries.
      * @param string  $callback  A JS callback.
-     * @param boolean $sensor    The sensor flag.
+     * @param boolean $clientId  Client Id.
      *
      * @return string The HTML output.
      */
@@ -61,8 +61,7 @@ class ApiHelper extends AbstractHelper
         $language = 'en',
         array $libraries = array(),
         $callback = null,
-        $sensor = false
-    )
+        $clientId = null)
     {
         $otherParameters = array();
 
@@ -71,24 +70,19 @@ class ApiHelper extends AbstractHelper
         }
 
         $otherParameters['language'] = $language;
-        $otherParameters['sensor'] = json_encode((bool) $sensor);
+        if($clientId !== null){
+            $otherParameters['client'] = $clientId;
+        }
 
-        $this->jsonBuilder
-            ->reset()
-            ->setValue('[other_params]', urldecode(http_build_query($otherParameters)));
+        $urlEncoded = urldecode(http_build_query($otherParameters));
 
         if ($callback !== null) {
             $this->jsonBuilder->setValue('[callback]', $callback, false);
         }
 
-        $callbackFunction = 'load_ivory_google_map_api';
-        $url = sprintf('//www.google.com/jsapi?callback=%s', $callbackFunction);
-        $loader = sprintf('google.load("maps", "3", %s);', $this->jsonBuilder->build());
+        $url = 'http://maps.googleapis.com/maps/api/js?v=3.33&'.$urlEncoded;
 
         $output = array();
-        $output[] = '<script type="text/javascript">'.PHP_EOL;
-        $output[] = sprintf('function %s () { %s };'.PHP_EOL, $callbackFunction, $loader);
-        $output[] = '</script>'.PHP_EOL;
         $output[] = sprintf('<script type="text/javascript" src="%s"></script>'.PHP_EOL, $url);
 
         $this->loaded = true;

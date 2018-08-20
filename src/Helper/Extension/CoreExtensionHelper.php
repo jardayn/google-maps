@@ -104,8 +104,11 @@ class CoreExtensionHelper implements ExtensionHelperInterface
         }
 
         $output = array();
-
-        $output[] = $this->apiHelper->render($map->getLanguage(), $this->getLibraries($map), $callback);
+        $clientId = null;
+        if($map->getBusinessAccount() !== null){
+            $clientId = $map->getBusinessAccount()->getClientId();
+        }
+        $output[] = $this->apiHelper->render($map->getLanguage(), $this->getLibraries($map), $callback,$clientId);
         $output[] = $this->markerClusterHelper->renderLibraries($map->getMarkerCluster(), $map);
 
         return implode('', $output);

@@ -33,6 +33,7 @@ use Ivory\GoogleMap\Overlays\MarkerCluster;
 use Ivory\GoogleMap\Overlays\Polygon;
 use Ivory\GoogleMap\Overlays\Polyline;
 use Ivory\GoogleMap\Overlays\Rectangle;
+use Ivory\GoogleMap\Services\BusinessAccount;
 
 /**
  * Map wich describes a google map.
@@ -120,11 +121,19 @@ class Map extends AbstractJavascriptVariableAsset
     /** @var string */
     protected $language;
 
+    /** @var BusinessAccount|null  */
+    protected $businessAccount;
+
+
     /**
      * Creates a map.
+     *
+     * @param BusinessAccount|null $businessAccount
+     * @throws Exception\AssetException
      */
-    public function __construct()
+    public function __construct(BusinessAccount $businessAccount = null)
     {
+        $this->businessAccount = $businessAccount;
         $this->setPrefixJavascriptVariable('map_');
 
         $this->htmlContainerId = 'map_canvas';
@@ -158,6 +167,22 @@ class Map extends AbstractJavascriptVariableAsset
 
         $this->libraries = array();
         $this->language = 'en';
+    }
+
+    /**
+     * @return BusinessAccount|null
+     */
+    public function getBusinessAccount()
+    {
+        return $this->businessAccount;
+    }
+
+    /**
+     * @param BusinessAccount|null $businessAccount
+     */
+    public function setBusinessAccount($businessAccount)
+    {
+        $this->businessAccount = $businessAccount;
     }
 
     /**
