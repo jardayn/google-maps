@@ -5,7 +5,7 @@
 
 
 I stole this from here https://github.com/egeloen/ivory-google-map 
-The goal is to fix the fact that some functionality doesn't work with chrome 68.  
+The goal is to fix the fact that some functionality doesn't work with chrome 68 for version 1.4.1  
 
 Bla bla bla license stuff n things
 
