@@ -3,6 +3,12 @@
 [![Build Status](https://secure.travis-ci.org/egeloen/ivory-google-map.png?branch=master)](http://travis-ci.org/egeloen/ivory-google-map)
 [![Coverage Status](https://coveralls.io/repos/egeloen/ivory-google-map/badge.png?branch=master)](https://coveralls.io/r/egeloen/ivory-google-map?branch=master)
 
+
+I stole this from here https://github.com/egeloen/ivory-google-map 
+The goal is to fix the fact that some functionality doesn't work with chrome 68.  
+
+Bla bla bla license stuff n things
+
 The Ivory Google Map project provides a Google Map integration for your PHP 5.3+ Project. It allows you to manage map,
 controls, overlays, events & services through the Google Map API v3.
 
